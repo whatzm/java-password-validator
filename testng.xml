@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+
+<suite name="Password Validator Suite">
+
+    <test name="Character Validation Tests">
+        <groups>
+            <run>
+                <include name="characterValidation"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="test.PasswordCharacterTest"/>
+        </classes>
+    </test>
+
+    <test name="Basic Validation Tests">
+        <groups>
+            <run>
+                <include name="basicValidation"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="test.PasswordBasicValidationTest"/>
+        </classes>
+    </test>
+
+    <test name="Error Validation Tests">
+        <groups>
+            <run>
+                <include name="errorValidation"/>
+            </run>
+        </groups>
+
+        <classes>
+            <class name="test.PasswordErrorTest"/>
+        </classes>
+    </test>
+
+</suite>

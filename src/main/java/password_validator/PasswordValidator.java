@@ -2,6 +2,8 @@ package password_validator;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Predicate;
 
 public class PasswordValidator {
 
@@ -19,7 +21,7 @@ public class PasswordValidator {
         return false;
     }
 
-    public boolean hasUpperCase(String password){
+    public boolean hasUpperCase(String password) {
         for (int i = 0; i < password.length(); i++) {
             char currentChar = password.charAt(i);
             if (Character.isUpperCase(currentChar)) {
@@ -29,7 +31,7 @@ public class PasswordValidator {
         return false;
     }
 
-    public boolean hasLowerCase(String password){
+    public boolean hasLowerCase(String password) {
         for (int i = 0; i < password.length(); i++) {
             char currentChar = password.charAt(i);
             if (Character.isLowerCase(currentChar)) {
@@ -39,7 +41,7 @@ public class PasswordValidator {
         return false;
     }
 
-    public boolean hasSpecialCharacter(String password){
+    public boolean hasSpecialCharacter(String password) {
         for (int i = 0; i < password.length(); i++) {
             char currentChar = password.charAt(i);
             if (PasswordRules.SPECIAL_CHARACTERS.contains(currentChar)) {
@@ -49,23 +51,21 @@ public class PasswordValidator {
         return false;
     }
 
-    public List<PasswordError> getErrors(String password){
+    public List<PasswordError> getErrors(String password) {
         List<PasswordError> errors = new ArrayList<>();
 
-        if(!hasMinLength(password)){
-            errors.add(PasswordError.TOO_SHORT);
-        }
-        if(!hasDigit(password)){
-            errors.add(PasswordError.NO_DIGIT);
-        }
-        if(!hasUpperCase(password)){
-            errors.add(PasswordError.NO_UPPERCASE);
-        }
-        if(!hasLowerCase(password)){
-            errors.add(PasswordError.NO_LOWERCASE);
-        }
-        if(!hasSpecialCharacter(password)){
-            errors.add(PasswordError.NO_SPECIAL_CHARACTER);
+        Map<PasswordError, Predicate<String>> rules = Map.of(
+                PasswordError.TOO_SHORT, this::hasMinLength,
+                PasswordError.NO_DIGIT, this::hasDigit,
+                PasswordError.NO_UPPERCASE, this::hasUpperCase,
+                PasswordError.NO_LOWERCASE, this::hasLowerCase,
+                PasswordError.NO_SPECIAL_CHARACTER, this::hasSpecialCharacter
+        );
+
+        for (Map.Entry<PasswordError, Predicate<String>> rule : rules.entrySet()) {
+            if (!rule.getValue().test(password)) {
+                errors.add(rule.getKey());
+            }
         }
 
         return errors;
