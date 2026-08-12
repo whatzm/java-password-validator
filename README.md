@@ -1,10 +1,10 @@
 # Password Validator
 
-A simple console application written in Java that validates passwords based on predefined security rules.
+A simple Java console application that validates passwords based on predefined security rules.
 
 ## Features
 
-The application checks whether a password meets the following requirements:
+The application checks whether a password:
 
 - Contains at least **8 characters**
 - Contains at least **one digit**
@@ -14,19 +14,15 @@ The application checks whether a password meets the following requirements:
 
 Supported special characters:
 
-```
+```text
 ! @ # $ % ^ & *
 ```
 
-If the password is invalid, the application displays all validation errors.
-
-After each validation, the user can choose to check another password or exit the application.
-
----
+If the password is invalid, all validation errors are displayed.
 
 ## Project Structure
 
-```
+```text
 src
 ├── main
 │   └── java
@@ -38,47 +34,30 @@ src
 │
 └── test
     └── java
+        ├── base
+        ├── data
+        ├── helper
+        └── test
+
+testng
+├── testng.xml
+├── regression.xml
+└── smoke.xml
 ```
 
-### Classes description
+## Testing
 
-| Class | Description |
-|---|---|
-| `Program` | Entry point of the application. Handles user input and application flow. |
-| `PasswordValidator` | Contains password validation logic. |
-| `PasswordRules` | Stores validation constants and allowed special characters. |
-| `PasswordError` | Enum containing validation errors and messages. |
+The project uses **TestNG** for automated testing.
 
----
+Tests are organized into the following groups:
 
-## Example
+- `positiveValidation` — valid password tests
+- `negativeValidation` — invalid password tests
+- `errorValidation` — password error validation
+- `regression` — full regression test suite
+- `smoke` — critical tests for quick validation
 
-### Valid password
-
-```
-Enter your password: Password123!
-
-Password is valid!
-
-Do you want to check another password? (Y/N)
-```
-
-### Invalid password
-
-```
-Enter your password: pass
-
-Password is INVALID!
-
-Password must contain at least 8 characters.
-Password must contain at least one DIGIT.
-Password must contain at least one UPPERCASE LETTER.
-Password must contain at least one SPECIAL CHARACTER.
-
-Do you want to check another password? (Y/N)
-```
-
----
+Test data is provided using TestNG `DataProvider`s.
 
 ## Validation Rules
 
@@ -87,12 +66,10 @@ A password is considered valid only if it satisfies all rules:
 | Rule | Requirement |
 |---|---|
 | Minimum length | At least 8 characters |
-| Uppercase letter | At least one uppercase letter |
-| Lowercase letter | At least one lowercase letter |
-| Digit | At least one number |
-| Special character | At least one symbol from `! @ # $ % ^ & *` |
-
----
+| Uppercase letter | At least one |
+| Lowercase letter | At least one |
+| Digit | At least one |
+| Special character | At least one from `! @ # $ % ^ & *` |
 
 ## How to Run
 
@@ -104,11 +81,12 @@ git clone <repository-url>
 
 2. Open the project in IntelliJ IDEA.
 
-3. Run:
+3. Run `Program.java` to start the application.
 
-```
-Program.java
-```
-4. Enter a password in the console and follow the instructions.
+4. To run tests, use one of the TestNG suites:
 
----
+- `testng.xml` — validation tests by type
+- `regression.xml` — full regression suite
+- `smoke.xml` — smoke test suite
+
+The suites can be run directly from IntelliJ IDEA using a TestNG run configuration.
