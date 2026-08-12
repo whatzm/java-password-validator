@@ -7,73 +7,33 @@ import java.util.List;
 
 public class PasswordValidatorDataProvider {
 
-    @DataProvider(name = "passwordData")
-    public PasswordTestData[] passwordData() {
-        return new PasswordTestData[]{
-                new PasswordTestData(
-                        "Qwerty1!",
-                        true,
-                        true,
-                        true,
-                        true,
-                        true
-                ),
-                new PasswordTestData(
-                        "Qwertyuiop!",
-                        true,
-                        false,
-                        true,
-                        true,
-                        true
-                ),
-                new PasswordTestData(
-                        "QWERTYUIO1!",
-                        true,
-                        true,
-                        true,
-                        false,
-                        true
-                ),
-                new PasswordTestData(
-                        "Qwertyui1",
-                        true,
-                        true,
-                        true,
-                        true,
-                        false
-                ),
-                new PasswordTestData(
-                        "12345678",
-                        true,
-                        true,
-                        false,
-                        false,
-                        false
-                ),
-                new PasswordTestData(
-                        "Asdfghjk",
-                        true,
-                        false,
-                        true,
-                        true,
-                        false
-                ),
-                new PasswordTestData(
-                        "!@#$%^&*",
-                        true,
-                        false,
-                        false,
-                        false,
-                        true
-                ),
-                new PasswordTestData(
-                        "Qwe1!",
-                        false,
-                        true,
-                        true,
-                        true,
-                        true
-                )
+    @DataProvider(name = "positivePasswordData")
+    public String[] positivePasswordData() {
+        return new String[]{
+                "Qwerty1!",
+                "Qwerty123!",
+                "Password1!",
+                "Qwerty123!",
+                "Test1234@",
+                "QWERTYUIOPa123456789!",
+                "Qw1@#$%^&*(",
+                "QWERTy1!"
+        };
+    }
+
+    @DataProvider(name = "negativePasswordData")
+    public String[] negativePasswordData(){
+        return new String[]{
+                "Q",
+                "Qwerty",
+                "password",
+                "PASSWORD",
+                "12345678",
+                "!@#$%^&*",
+                "Qwertyui123",
+                "Qwerty!@#",
+                "Qwe1!",
+                "qwerty123!"
         };
     }
 

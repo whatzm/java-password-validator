@@ -4,27 +4,27 @@
 
 <suite name="Password Validator Suite">
 
-    <test name="Character Validation Tests">
+    <test name="Positive Password Validation Tests">
         <groups>
             <run>
-                <include name="characterValidation"/>
+                <include name="positiveValidation"/>
             </run>
         </groups>
 
         <classes>
-            <class name="test.PasswordCharacterTest"/>
+            <class name="test.PositivePasswordTest"/>
         </classes>
     </test>
 
-    <test name="Basic Validation Tests">
+    <test name="Negative Password Validation Tests">
         <groups>
             <run>
-                <include name="basicValidation"/>
+                <include name="negativeValidation"/>
             </run>
         </groups>
 
         <classes>
-            <class name="test.PasswordBasicValidationTest"/>
+            <class name="test.NegativePasswordTest"/>
         </classes>
     </test>
 
